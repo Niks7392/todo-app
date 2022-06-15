@@ -18,12 +18,9 @@ export const NavBar = () => {
                             <NavLink className="nav-link" to="/">Tasks</NavLink>
                         </li> */}
                     </ul>
-
-                    <ul >
-                        <li className="nav-items" style={{listStyle: 'none'}}>
-                            <NavLink className="nav-link" to='user-profile'>Your Account</NavLink>
-                        </li>
-                    </ul>
+                    <li className="nav-items" style={{ listStyle: 'none' }}>
+                        <NavLink className="nav-link" to='user-profile'>Your Account</NavLink>
+                    </li>
                 </div>
             </div>
         </nav>

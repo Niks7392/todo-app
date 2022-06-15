@@ -7,12 +7,14 @@ import {
 } from 'react-router-dom'
 import { Home } from './components/Home';
 import { UserProfile } from './components/UserProfile';
+import { ListState } from './context/ListState';
 
 
 
 function App() {
 
   return (
+    <ListState>
     <Router>
       <NavBar />
       <Routes>
@@ -20,6 +22,7 @@ function App() {
         <Route exact path = '/user-profile' element={<UserProfile/>}/>
       </Routes>
     </Router>
+    </ListState>
   );
 }
 
