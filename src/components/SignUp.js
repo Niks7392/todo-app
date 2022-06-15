@@ -2,10 +2,14 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import ListContext from '../context/ListContext'
 
-export const SignUp = () => {
+export const SignUp = (props) => {
   // contexts 
   const context = useContext(ListContext)
-  const {serverHost} = context;
+  const { serverHost, showAlert } = context;
+
+  // props
+  const {loginRef, navigate} = props;
+
   // states 
   const [credentials, setcredentials] = useState({ name: '', email: '', password: '' })
 
@@ -24,11 +28,16 @@ export const SignUp = () => {
       })
     })
     const json = await response.json()
-    if(json.authToken){
+    if (json.authToken) {
       setcredentials({ name: '', email: '', password: '' })
       localStorage.setItem('token', json.authToken)
+      showAlert('success', 'Niks7392 says : welcome to the tasks')
+      navigate('/')
+    }else{
+      showAlert('danger', 'Niks7392 Says : email already exists please login')
+      loginRef.current.click()
     }
-    console.log(json);
+    // console.log(json);
   }
   const onChangeInputs = (e) => {
     setcredentials({ ...credentials, [e.target.name]: e.target.value })
@@ -50,7 +59,7 @@ export const SignUp = () => {
           <input onChange={onChangeInputs} value={credentials.password} name='password' type="password" className="form-control" id="signUppassword" />
         </div>
 
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary">Sign Up</button>
       </form>
     </div>
   )

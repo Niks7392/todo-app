@@ -1,9 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ListContext from '../context/ListContext'
 
 export const AddList = () => {
+    const navigate = useNavigate()
     const context = useContext(ListContext)
-    const {handleListSubmit, addListData, setlistData} = context;
+    const {handleListSubmit, addListData, setlistData, showAlert} = context;
+
+    useEffect(()=>{
+        if(!localStorage.getItem('token')){
+            navigate('/user-profile')
+            showAlert('warning', 'Niks7392 says : Login or Signup first to create tasks')
+        }
+        // eslint-disable-next-line
+    }, [])
 
     // funcs
     const onChangeInputs = (e)=>{

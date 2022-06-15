@@ -9,14 +9,18 @@ import { Home } from './components/Home';
 import { UserProfile } from './components/UserProfile';
 import { ListState } from './context/ListState';
 import { AddList } from './components/AddList';
+import { Alert } from './components/Alert';
+import { useState } from 'react';
 
 
 
 function App() {
+  const [Title, setTitle] = useState('')
   return (
     <ListState >
     <Router>
-      <NavBar />
+      <NavBar setTitle={setTitle} Title={Title}/>
+      <Alert/>
       <Routes>
         <Route exact path = '/' element={<Home/>}/>
         <Route exact path = '/user-profile' element={<UserProfile/>}/>

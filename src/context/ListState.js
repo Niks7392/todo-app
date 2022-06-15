@@ -10,31 +10,12 @@ export const ListState = (props) => {
     const [credentials, setcredentials] = useState({ email: '', password: '' });
     const listsInitial = []
     const [fetchLists, setLists] = useState(listsInitial)
-    const [addListData, setlistData] = useState({ title: '', description: '', tag: '' })
-
+    const [addListData, setlistData] = useState({ title: '', description: '', tag: '' });
+    const [User, setUser] = useState([]);
+    const [alert, setalert] = useState({ logo: '', msg: '' });
+    
     // functions 
-    const onChangeInputs = (e) => {
-        setcredentials({ ...credentials, [e.target.name]: e.target.value })
-    }
-    const handleLoginSubmit = async (e) => {
-        e.preventDefault()
-        const response = await fetch(`${serverHost}/api/user-auth/login-user`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: credentials.email,
-                password: credentials.password
-            })
-        })
-        const json = await response.json()
-        if (json.authToken) {
-            setcredentials({ email: '', password: '' })
-            localStorage.setItem('token', json.authToken)
-        }
-        console.log(json);
-    };
+ 
     const getLists = async () => {
         const response = await fetch(`${serverHost}/api/lists/get-lists`, {
             method: 'GET',
@@ -66,6 +47,7 @@ export const ListState = (props) => {
         const addedListItem = json.saveList
         setLists(fetchLists.concat(addedListItem))
         window.location = '/'
+        showAlert('success', 'Niks7392 says : created task for u')
         setlistData({ title: '', description: '', tag: '' })
         // console.log(json);
     };
@@ -80,6 +62,7 @@ export const ListState = (props) => {
         await response.json()
         const afterList = fetchLists.filter((list) => { return list._id !== id })
         setLists(afterList)
+        showAlert('primary', 'task deleted succesfully')
     };
 
 
@@ -107,9 +90,31 @@ export const ListState = (props) => {
             }
         }
         setLists(newList);
+        showAlert('success', 'task updated successfully')
+    };
+    // tried other non-familiar-way for selection lmao ;)
+    const getUser = () => {
+        fetch(`${serverHost}/api/user-auth/get-user`, {
+            method: 'GET',
+            headers: {
+                'auth-token': localStorage.getItem('token')
+            }
+        }).then(res => res.json())
+            .catch(err => console.log(err))
+            .then(json => setUser(json))
+    };
+
+    const showAlert = (logo, msg)=>{
+        setalert({
+            logo : logo,
+            msg : msg
+        });
+        setTimeout(() => {
+            setalert({ logo: '', msg: '' })
+        }, 3000);
     }
     return (
-        <ListContext.Provider value={{editList, deleteList, setlistData, addListData, handleListSubmit, serverHost, handleLoginSubmit, onChangeInputs, credentials, fetchLists, getLists }}>
+        <ListContext.Provider value={{setcredentials, alert, showAlert, User, getUser, editList, deleteList, setlistData, addListData, handleListSubmit, serverHost,  credentials, fetchLists, getLists }}>
             {props.children}
         </ListContext.Provider>
     )

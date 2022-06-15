@@ -1,11 +1,25 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
-export const NavBar = () => {
+export const NavBar = (props) => {
+    const {setTitle, Title} = props;
+
+    const location = useLocation();
+    if(location.pathname === '/user-profile'){
+        setTitle('your account details')
+        document.title = Title
+    }else if(location.pathname === '/create-new-task'){
+        setTitle('Create a Task')
+        document.title = Title
+    }else if(location.pathname === '/'){
+        setTitle('To-Do App ~Niks7392')
+        document.title = Title
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <NavLink className="navbar-brand" to="/">Navbar</NavLink>
+                <NavLink className="navbar-brand" to="/">ToDo ~Niks7392</NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="/navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -19,7 +33,7 @@ export const NavBar = () => {
                         </li>
                     </ul>
                     <li className="nav-items" style={{ listStyle: 'none' }}>
-                        <NavLink className="nav-link" to='user-profile'>Your Account</NavLink>
+                        <NavLink className="nav-link" to='/user-profile'>Your Account</NavLink>
                     </li>
                 </div>
             </div>
