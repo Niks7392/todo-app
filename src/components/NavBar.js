@@ -12,11 +12,11 @@ export const NavBar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+                            <NavLink className="nav-link " aria-current="page" to="/">Tasks</NavLink>
                         </li>
-                        {/* <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Tasks</NavLink>
-                        </li> */}
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/create-new-task">Create new Task</NavLink>
+                        </li>
                     </ul>
                     <li className="nav-items" style={{ listStyle: 'none' }}>
                         <NavLink className="nav-link" to='user-profile'>Your Account</NavLink>
