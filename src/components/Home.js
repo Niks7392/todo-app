@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import ListContext from '../context/ListContext';
 import { Lists } from './Lists';
 import Modal from 'react-modal';
 
-export const Home = () => {
+export const Home = (props) => {
+    const {Title} = props;
+
     // contexts 
     const context = useContext(ListContext)
     const { fetchLists, getLists, deleteList, editList, showAlert } = context;
@@ -17,8 +19,8 @@ export const Home = () => {
     const refClose = useRef()
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            // console.log('hello');
             getLists()
+            document.title = Title
         } else {
             navigate('/user-profile')
             showAlert('warning', 'Niks7392 says : Login or Signup first to create tasks')

@@ -10,21 +10,19 @@ import { UserProfile } from './components/UserProfile';
 import { ListState } from './context/ListState';
 import { AddList } from './components/AddList';
 import { Alert } from './components/Alert';
-import { useState } from 'react';
 
 
 
 function App() {
-  const [Title, setTitle] = useState('')
   return (
     <ListState >
     <Router>
-      <NavBar setTitle={setTitle} Title={Title}/>
+      <NavBar />
       <Alert/>
       <Routes>
-        <Route exact path = '/' element={<Home/>}/>
-        <Route exact path = '/user-profile' element={<UserProfile/>}/>
-        <Route exact path = '/create-new-task' element={<AddList/>}/>
+        <Route exact path = '/' element={<Home Title='To-Do App ~Niks7392'/>}/>
+        <Route exact path = '/user-profile' element={<UserProfile Title='Account Details'/>}/>
+        <Route exact path = '/create-new-task' element={<AddList Title='Create a To-Do List'/>}/>
       </Routes>
     </Router>
     </ListState>

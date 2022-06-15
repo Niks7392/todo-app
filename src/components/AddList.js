@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ListContext from '../context/ListContext'
 
-export const AddList = () => {
+export const AddList = (props) => {
+    const {Title} = props
     const navigate = useNavigate()
     const context = useContext(ListContext)
     const {handleListSubmit, addListData, setlistData, showAlert} = context;
@@ -11,6 +12,8 @@ export const AddList = () => {
         if(!localStorage.getItem('token')){
             navigate('/user-profile')
             showAlert('warning', 'Niks7392 says : Login or Signup first to create tasks')
+        }else{
+            document.title = Title
         }
         // eslint-disable-next-line
     }, [])

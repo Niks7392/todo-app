@@ -7,7 +7,8 @@ import { Login } from './Login'
 import { SignUp } from './SignUp'
 import { useNavigate } from 'react-router-dom';
 
-export const UserProfile = () => {
+export const UserProfile = (props) => {
+    const {Title} = props;
     // contexts 
     const context = useContext(ListContext)
     const { getUser, User } = context;
@@ -16,6 +17,7 @@ export const UserProfile = () => {
     useEffect(() => {
         if (localStorage.getItem('token')) {
             getUser()
+            document.title = Title
         }
         // eslint-disable-next-line
     }, [])
