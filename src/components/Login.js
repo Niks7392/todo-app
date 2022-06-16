@@ -3,12 +3,11 @@ import ListContext from '../context/ListContext'
 
 export const Login = (props) => {
   // some basic declares
-  const serverHost = process.env.REACT_APP_SERVER_HOST;
   const {navigate} = props;
 
   // contexts 
   const context = useContext(ListContext)
-  const { credentials, setcredentials, showAlert } = context
+  const { credentials, setcredentials, showAlert, serverHost } = context
 
 
   // funcs 

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export const ListState = (props) => {
     // some basic declares
-    const serverHost = process.env.REACT_APP_SERVER_HOST;
+    const serverHost = process.env.REACT_APP_DEV_HOST;
 
     // states 
     const [credentials, setcredentials] = useState({ email: '', password: '' });
